@@ -1,0 +1,28 @@
+#!/bin/sh
+# /etc/profile - global shell configuration
+
+# Set PATH
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH
+
+# Set prompt (PS1)
+# \u = user, \h = hostname, \w = current directory
+PS1='\[\033[1;32m\]\u@\h\[\033[0m\]:\[\033[1;34m\]\w\[\033[0m\]\$ '
+
+# Set environment variables
+export HISTFILE=/var/log/.ash_history
+export HISTSIZE=200
+export EDITOR=vi
+export PAGER=less
+export LANG=C.UTF-8
+
+# Message of the day
+echo "========================================="
+echo "   Welcome to Magdi Minimal Linux 🧠"
+echo "   $(uname -sr)"
+echo "========================================="
+
+# Load additional scripts
+for script in /etc/profile.d/*.sh ; do
+    [ -r "$script" ] && . "$script"
+done

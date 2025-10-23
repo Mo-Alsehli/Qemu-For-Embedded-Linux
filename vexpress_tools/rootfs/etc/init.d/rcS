@@ -1,0 +1,25 @@
+#!/bin/sh
+# /etc/init.d/rcS
+
+# Minimal mounts (run before any getty)
+mkdir -p /proc /sys /dev /run /tmp /var/log /mnt /root
+mount -t proc    none /proc
+mount -t sysfs   none /sys
+mount -t devtmpfs none /dev
+mount -t tmpfs   none /run
+
+# Hostname (needed to avoid '(none)')
+echo mmagdi > /etc/hostname
+hostname "$(cat /etc/hostname)"
+
+# Basic identity files
+grep -q '^root:' /etc/passwd || echo 'root:x:0:0:root:/root:/bin/sh' >> /etc/passwd
+grep -q '^root:' /etc/group  || echo 'root:x:0:' >> /etc/group
+grep -q '^root:' /etc/shadow || echo 'root::0:0:99999:7:::' >> /etc/shadow
+
+# Optional: simple /etc/hosts to make prompts nicer
+if ! grep -q '^127\.0\.1\.1' /etc/hosts 2>/dev/null; then
+  {
+    echo '127.0.0.1   localhost'
+    echo "127.0.1.1   $(cat /etc/hostname)"
+ 

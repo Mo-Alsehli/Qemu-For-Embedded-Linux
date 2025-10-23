@@ -1,0 +1,4 @@
+::sysinit:/etc/init.d/rcS
+# For QEMU serial
+#::respawn:/sbin/getty 115200 console
+::askfirst:/bin/sh

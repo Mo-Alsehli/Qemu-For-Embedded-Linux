@@ -1,0 +1,4 @@
+*.wic
+u-boot
+overlays
+sdcard
