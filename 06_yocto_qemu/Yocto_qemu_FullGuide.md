@@ -49,6 +49,12 @@ IMAGE_FSTYPES += "wic"
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks ssh-server-dropbear"
 ```
 
+**NOTE: If you have `downloads` and `sstate-cache` folders shared within you yocto build don't forget to specify their paths in `local.conf`.**
+```
+DL_DIR ?= "${TOPDIR}/../downloads"
+SSTATE_DIR ?= "${TOPDIR}/../sstate-cache"
+```
+
 You can also test a headless image (CLI only) by omitting Weston.
 
 ---
