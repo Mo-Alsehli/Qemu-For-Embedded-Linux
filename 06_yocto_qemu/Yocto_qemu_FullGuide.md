@@ -40,10 +40,10 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 
 # Add GUI and input support
 IMAGE_INSTALL:append = " weston weston-init seatd weston-examples \
-                         mesa mesa-driver-virtio"
+                         mesa"
 
 # Produce .wic images for full-disk emulation
-IMAGE_FSTYPES += "wic"
+#IMAGE_FSTYPES += "wic" # prefered type ext4
 
 # Optional QoL
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks ssh-server-dropbear"
