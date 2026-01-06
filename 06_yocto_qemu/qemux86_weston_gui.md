@@ -87,14 +87,15 @@ qemu-system-x86_64 \
   -smp 4 \
   -m 4096 \
   -kernel tmp/deploy/images/qemux86-64/bzImage \
-  -append "root=/dev/vda rw rootwait console=ttyS0,115200" \
+  -append "root=/dev/vda2 rw rootwait console=ttyS0,115200" \
   -drive file=tmp/deploy/images/qemux86-64/core-image-weston-qemux86-64.wic,format=raw,if=virtio \
   -device virtio-gpu-pci \
   -display gtk,gl=on \
-  -netdev user,id=net0 \
+  -netdev user,id=net0,hostfwd=tcp::2222-:22,hostfwd=tcp::2121-:21 \
   -device virtio-net-pci,netdev=net0 \
   -serial mon:stdio
 ```
+**NOTE**: you can access it locally the qemu system using `ssh root@localhost -p 2222`.
 
 ### Notes
 
@@ -243,10 +244,11 @@ qemu-system-x86_64 \
   -drive file=tmp/deploy/images/qemux86-64/core-image-weston-qemux86-64.wic,format=raw,if=virtio \
   -device virtio-gpu-pci \
   -display gtk,gl=on \
-  -netdev user,id=net0 \
+  -netdev user,id=net0,hostfwd=tcp::2222-:22,hostfwd=tcp::2121-:21 \
   -device virtio-net-pci,netdev=net0 \
   -serial mon:stdio
 ```
+**NOTE**: you can access the qemu system using `ssh root@localhost -p 2222`.
 
 ### Partition Mapping
 
